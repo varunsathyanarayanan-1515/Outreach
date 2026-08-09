@@ -47,7 +47,12 @@ Create a schedule automation whose action is `message_session` targeting the SAM
 
 ## Files
 
-- `contacts.csv` - cold targets (rank, company, name, title, url)
-- `finance_connections_us.csv` - warm targets (name, headline, url, why relevant, location)
-- `outreach-log.csv` / `dm-log.csv` - action logs
-- `messages.md` / `warm-messages.md` - drafted copy
+All under `context_docs/` (see its README for the full index):
+
+- `network/my-linkedin-connections.csv` - the user's own 1st-degree connections (name, headline, public_id, location)
+- `targets/dream100-contacts.csv` - cold targets (rank, company, name, title, url)
+- `targets/warm-connections-us.csv` - warm targets with per-person writeup and drafted message
+- `outreach/connection-requests-log.csv` - one row per connection request (sent / skipped + reason)
+- `outreach/messages-log.csv` - one row per DM actually sent, with the verbatim text, reply status and follow-up date
+
+Append to the logs only after the action has actually happened on LinkedIn. Record the message exactly as sent, not as drafted.
