@@ -31,6 +31,12 @@ Everything backing the outbound motion to US accounting/CPA firms.
 
 Both logs are append-only. Nothing goes in until it has actually happened on LinkedIn.
 
+## `annuity/` — AnnuityOrigin advisor campaign (separate motion, see `skills/annuity-advisor-outreach/`)
+
+- `annuity-linkedin-copy.md` — N1 / M1..M6 / F1 copy variants and the A/B axes (`lower`/`caps`, `note`/`nonote`).
+- `annuity-advisors.csv` — screened target list (`tier, name, practice, title, linkedin_url, evidence columns, notes`).
+- `annuity-dm-log.csv` — append-only send/skip log (`linkedin_url, name, segment, action, variant, case, date, details`).
+
 ## `research/` — what I know
 
 - `accounting-software-market-learnings.md`
