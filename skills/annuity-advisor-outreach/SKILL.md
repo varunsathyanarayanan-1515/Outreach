@@ -69,6 +69,7 @@ Industry contacts (F1): "i'm building annuityorigin.com... you've seen this spac
 - Tier A first, then B, then C.
 - Verify on the live profile before acting: name, practice, US location. Mismatch = skip + log.
 - If the primary button is Follow, use the three-dots (More) menu -> Connect.
+- Only click the Connect control in the profile top card (aria-label "Invite <full name> to connect") or the More menu item. Never match a bare "Connect" anywhere on the page: "People similar to" and sidebar cards also have Connect buttons and will invite a stranger. Confirm the invite dialog names the target before sending; if a wrong person is invited, withdraw it immediately from My Network > Manage invitations > Sent, log it as connect-withdrawn, and count it toward the daily cap.
 - Existing 1st-degree connections: NEVER message without asking the operator first. Flag and skip.
 - Before any DM, open the thread. Existing conversation = skip + flag.
 - Stop immediately on login walls, verification challenges, invite/message limit warnings. Tell the operator.
