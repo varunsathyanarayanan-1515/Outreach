@@ -90,7 +90,7 @@ Industry contacts (F1): "i'm building annuityorigin.com... you've seen this spac
 linkedin_url,name,segment,action,variant,case,date,details
 ```
 - segment: advisor | industry
-- action: connect-note | connect-nonote | dm | accepted | skip | connect-withdrawn | do-not-contact
+- action: connect-note | connect-nonote | dm | reply | accepted | skip | connect-withdrawn | do-not-contact
 - variant: N1 / M1..M6 / F1
 
 Each run: log every send/skip, check for newly accepted invites and mark them, commit, send the operator a one-line summary (connects by note/no-note, DMs by variant+case, skips, acceptances, new prospects added).
