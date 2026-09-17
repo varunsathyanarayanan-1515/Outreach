@@ -37,6 +37,12 @@ Run parallel web searches like:
 
 Parse results, dedupe against the CSV, keep only rows with real evidence.
 
+Warm sources come first (v2 strategy, 2026-09-17; cold 3rd-degree invites converted at 4.6%):
+1. 2nd-degree annuity/FIA advisors who share a mutual with the operator (LinkedIn search: People, 2nd, keywords "annuity" / "fixed indexed" / "retirement income"; note the mutual in `notes`).
+2. Advisors who liked/commented on recent annuity or retirement-income posts (active, checks LinkedIn).
+3. Cold search results only if they show 500+ connections and a post or comment in the last 30 days.
+Skip profiles with <200 connections or no activity in 6 months; they rarely see invites.
+
 ## 3. Target CSV schema (`annuity-advisors.csv`)
 
 ```
@@ -46,11 +52,12 @@ tier: A (strong FIA/independent/virtual evidence), B (good fit, gaps), C (adjace
 
 ## 4. Copy - adapted from the cold email sequence
 
-Two A/B axes, logged per send:
+A/B axis for DMs, logged per send:
 - case: `lower` (all lowercase) vs `caps` (normal capitalization)
-- connect: `note` vs `nonote` invite
 
-Connection note (N1, <=200 chars):
+Invites are sent WITHOUT a note (v2). Result through 2026-09-16: note 1/68 accepted (1.5%) vs nonote 5/62 (8%); pitch notes from a non-advisor profile are declined reflexively. Do not use N1 unless the operator re-enables it.
+
+Retired connection note (N1, <=200 chars):
 > hey {{first_name}}, are you actively taking on more annuity cases right now or at capacity? building annuityorigin.com and talking to advisors like you
 
 Messages after accept (rotate M1-M6, personalize the first clause from their profile, no em dashes):
@@ -66,7 +73,10 @@ Industry contacts (F1): "i'm building annuityorigin.com... you've seen this spac
 ## 5. Daily execution rules
 
 - HARD CAP: 15 total connects + messages per day. Skips do not count; replace with the next row.
-- Tier A first, then B, then C.
+- Warm targets first (mutual with operator or Yuvan, recent engagers), then Tier A, B, C.
+- Before inviting, when the profile has a post from the last 30 days, react to it (Like) first; this puts the operator's name in front of them before the invite arrives.
+- Keep pending invites under 100: at the start of each run withdraw the oldest invites older than 21 days (Manage invitations > Sent), log each as `connect-withdrawn` with details `stale >21d`. Withdrawals do not count toward the cap.
+- After accept, wait one day before the first DM; open the thread and check for an existing conversation first.
 - Verify on the live profile before acting: name, practice, US location. Mismatch = skip + log.
 - If the primary button is Follow, use the three-dots (More) menu -> Connect.
 - Only click the Connect control in the profile top card (aria-label "Invite <full name> to connect") or the More menu item. Never match a bare "Connect" anywhere on the page: "People similar to" and sidebar cards also have Connect buttons and will invite a stranger. Confirm the invite dialog names the target before sending; if a wrong person is invited, withdraw it immediately from My Network > Manage invitations > Sent, log it as connect-withdrawn, and count it toward the daily cap.
@@ -80,7 +90,7 @@ Industry contacts (F1): "i'm building annuityorigin.com... you've seen this spac
 linkedin_url,name,segment,action,variant,case,date,details
 ```
 - segment: advisor | industry
-- action: connect-note | connect-nonote | dm
+- action: connect-note | connect-nonote | dm | reply | accepted | skip | connect-withdrawn | do-not-contact
 - variant: N1 / M1..M6 / F1
 
 Each run: log every send/skip, check for newly accepted invites and mark them, commit, send the operator a one-line summary (connects by note/no-note, DMs by variant+case, skips, acceptances, new prospects added).
