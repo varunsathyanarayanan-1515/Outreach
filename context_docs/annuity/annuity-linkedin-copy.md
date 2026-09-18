@@ -2,9 +2,9 @@
 
 Two axes A/B tested, logged per send in annuity-dm-log.csv:
 - case: `lower` (all lowercase) vs `caps` (normal capitalization)
-- connect: `note` (short personalized note in the invite, <=200 chars) vs `nonote`
+- connect: `note` (short personalized note in the invite, <=200 chars) vs `nonote`. Test closed 2026-09-16 (note 1/68 vs nonote 5/62); all invites are now `nonote` and N1 is retired unless the operator re-enables it.
 
-Rotation: cycle through variants evenly so each cell gets volume. Cap: 15 total connects+messages per day.
+Rotation: cycle through DM variants evenly so each cell gets volume. Cap: 15 total connects+messages per day.
 
 ## Connection note variants (when `note` arm)
 
@@ -45,6 +45,6 @@ F1 caps: same words, normal capitalization.
 
 ## Logging columns (annuity-dm-log.csv)
 linkedin_url,name,segment,action,variant,case,date,details
-- segment: advisor | industry
-- action: connect-note | connect-nonote | dm
+- segment: advisor | industry | other
+- action: connect-note | connect-nonote | dm | reply | accepted | recheck | skip | connect-withdrawn | do-not-contact
 - variant: N1/M1..M6/F1
